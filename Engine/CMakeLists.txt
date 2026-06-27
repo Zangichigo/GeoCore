@@ -3,6 +3,8 @@ add_library(GeoCore STATIC
     Source/Position.cpp
     Source/WorldState.cpp
     Source/Engine.cpp
+    Source/Circle.cpp
+    Source/Polygon.cpp
 )
 
 target_include_directories(GeoCore

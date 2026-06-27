@@ -1,0 +1,1 @@
+This directory contains all automated tests for GeoCore.
