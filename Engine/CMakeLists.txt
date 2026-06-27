@@ -11,6 +11,7 @@ add_library(GeoCore STATIC
     Source/ProcessingContext.cpp
     Source/Geofencing.cpp
     Source/Math/Bearing.cpp
+    Source/PositionSample.cpp
 )
 
 target_include_directories(GeoCore
