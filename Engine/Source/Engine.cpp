@@ -1,13 +1,28 @@
 #include <GeoCore/Engine.hpp>
 
+#include <utility>
+
 namespace GeoCore
 {
 
 Engine::Engine() = default;
 
-void Engine::process(const WorldState& worldState)
+void Engine::addZone(Zone zone)
 {
-    (void)worldState;
+    zones_.push_back(std::move(zone));
+}
+
+ProcessingResult Engine::process(const WorldState& worldState)
+{
+    for (const auto& zone : zones_)
+    {
+        if (zone.contains(worldState.position()))
+        {
+            return ProcessingResult(true);
+        }
+    }
+
+    return ProcessingResult(false);
 }
 
 }

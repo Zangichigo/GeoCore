@@ -1,6 +1,10 @@
 #pragma once
 
+#include <vector>
+
+#include <GeoCore/ProcessingResult.hpp>
 #include <GeoCore/WorldState.hpp>
+#include <GeoCore/Zone.hpp>
 
 namespace GeoCore
 {
@@ -9,6 +13,11 @@ namespace GeoCore
     public:
         Engine();
 
-        void process(const WorldState& worldState);
+        void addZone(Zone zone);
+
+        ProcessingResult process(const WorldState& worldState);
+
+    private:
+        std::vector<Zone> zones_;
     };
 }

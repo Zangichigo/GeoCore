@@ -7,7 +7,8 @@ add_library(GeoCore STATIC
     Source/Polygon.cpp
     Source/Math/Distance.cpp
     Source/Zone.cpp
-    Source/Decision.cpp
+    Source/ProcessingResult.cpp
+    Source/ProcessingContext.cpp
 )
 
 target_include_directories(GeoCore

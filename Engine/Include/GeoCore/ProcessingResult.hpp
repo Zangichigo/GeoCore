@@ -2,10 +2,10 @@
 
 namespace GeoCore
 {
-    class Decision
+    class ProcessingResult
     {
     public:
-        explicit Decision(bool inside);
+        explicit ProcessingResult(bool inside);
 
         bool inside() const noexcept;
 
