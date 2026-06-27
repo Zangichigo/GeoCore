@@ -1,0 +1,31 @@
+###############################################################################
+# GeoCore
+###############################################################################
+
+# Automatic text detection
+* text=auto
+
+# Source files
+*.cpp text
+*.hpp text
+*.h text
+*.c text
+*.cmake text
+CMakeLists.txt text
+
+# Documentation
+*.md text
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+
+# Vector graphics
+*.svg text
+
+# Scripts
+*.sh text
+*.ps1 text
+*.bat text
