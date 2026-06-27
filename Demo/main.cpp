@@ -5,6 +5,9 @@
 #include <iostream>
 #include <memory>
 
+#include <GeoCore/Polygon.hpp>
+#include <vector>
+
 int main()
 {
     using namespace GeoCore;
@@ -27,6 +30,26 @@ int main()
               << "Inside: "
               << result.inside()
               << '\n';
+
+    Polygon garden(
+{
+    Position(0.0, 0.0),
+    Position(0.0, 10.0),
+    Position(10.0, 10.0),
+    Position(10.0, 0.0)
+});
+
+std::cout << '\n';
+
+std::cout << "Polygon test\n";
+
+std::cout << "Inside (5,5): "
+          << garden.contains(Position(5.0, 5.0))
+          << '\n';
+
+std::cout << "Outside (15,5): "
+          << garden.contains(Position(15.0, 5.0))
+          << '\n';
 
     return 0;
 }

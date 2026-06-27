@@ -1,18 +1,7 @@
 #include <GeoCore/Math/Distance.hpp>
+#include <GeoCore/Math/MathUtils.hpp>
 
 #include <cmath>
-
-namespace
-{
-    constexpr double EarthRadius = 6371000.0; // meters
-
-    constexpr double Pi = 3.14159265358979323846;
-
-    double toRadians(double degrees)
-    {
-        return degrees * Pi / 180.0;
-    }
-}
 
 namespace GeoCore::Math
 {
@@ -34,10 +23,11 @@ double distance(const Position& a, const Position& b)
         std::sin(deltaLongitude / 2.0) * std::sin(deltaLongitude / 2.0);
 
     const double centralAngle =
-        2.0 * std::atan2(std::sqrt(haversine),
-                         std::sqrt(1.0 - haversine));
+        2.0 * std::atan2(
+            std::sqrt(haversine),
+            std::sqrt(1.0 - haversine));
 
     return EarthRadius * centralAngle;
 }
 
-}
+} // namespace GeoCore::Math
