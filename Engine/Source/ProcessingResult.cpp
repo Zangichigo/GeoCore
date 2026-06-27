@@ -3,14 +3,15 @@
 namespace GeoCore
 {
 
-ProcessingResult::ProcessingResult(bool inside)
-    : inside_(inside)
+ProcessingResult::ProcessingResult(
+    ZoneMembership membership)
+    : membership_(membership)
 {
 }
 
 bool ProcessingResult::inside() const noexcept
 {
-    return inside_;
+    return membership_ == ZoneMembership::Inside;
 }
 
 }

@@ -1,15 +1,17 @@
 #pragma once
+#include <GeoCore/ZoneMembership.hpp>
 
 namespace GeoCore
 {
     class ProcessingResult
     {
     public:
-        explicit ProcessingResult(bool inside);
+      explicit ProcessingResult(ZoneMembership membership);
 
         bool inside() const noexcept;
 
     private:
-        bool inside_;
+        ZoneMembership membership_;
+        
     };
 }

@@ -18,11 +18,11 @@ ProcessingResult Engine::process(const WorldState& worldState)
     {
         if (zone.contains(worldState.position()))
         {
-            return ProcessingResult(true);
+            return ProcessingResult(ZoneMembership::Inside);
         }
     }
 
-    return ProcessingResult(false);
+    return ProcessingResult(ZoneMembership::Outside);;
 }
 
 }
