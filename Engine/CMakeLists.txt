@@ -1,5 +1,8 @@
 add_library(GeoCore STATIC
     Source/Version.cpp
+    Source/Position.cpp
+    Source/WorldState.cpp
+    Source/Engine.cpp
 )
 
 target_include_directories(GeoCore
