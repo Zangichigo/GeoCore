@@ -32,12 +32,13 @@ int main()
               << '\n';
 
     Polygon garden(
-{
-    Position(0.0, 0.0),
-    Position(0.0, 10.0),
-    Position(10.0, 10.0),
-    Position(10.0, 0.0)
-});
+    std::vector<Position>
+    {
+        Position(0.0, 0.0),
+        Position(0.0, 10.0),
+        Position(10.0, 10.0),
+        Position(10.0, 0.0)
+    });
 
 std::cout << '\n';
 
