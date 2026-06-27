@@ -1,4 +1,5 @@
 #include <GeoCore/Circle.hpp>
+#include <GeoCore/Math/Distance.hpp>
 
 namespace GeoCore
 {
@@ -11,9 +12,7 @@ Circle::Circle(Position center, double radius)
 
 bool Circle::contains(const Position& position) const
 {
-    (void)position;
-
-    return false;
+    return Math::distance(center_, position) <= radius_;
 }
 
-}
+} // namespace GeoCore
