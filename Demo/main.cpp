@@ -9,6 +9,9 @@
 #include <memory>
 #include <vector>
 
+#include <GeoCore/PositionSample.hpp>
+#include <chrono>
+
 int main()
 {
     using namespace GeoCore;
@@ -89,6 +92,23 @@ int main()
     std::cout << "Paris -> Lyon   : "
               << Math::bearing(paris, lyon)
               << "°\n";
+//
+// PositionSample demonstration
+//
+    std::cout << '\n';
+std::cout << "PositionSample test\n";
+
+PositionSample sample(
+    Position(48.8566, 2.3522),
+    std::chrono::system_clock::now());
+
+std::cout << "Latitude  : "
+          << sample.position().latitude()
+          << '\n';
+
+std::cout << "Longitude : "
+          << sample.position().longitude()
+          << '\n';
 
     return 0;
 }
