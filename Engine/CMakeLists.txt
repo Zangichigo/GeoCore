@@ -5,6 +5,7 @@ add_library(GeoCore STATIC
     Source/Engine.cpp
     Source/Circle.cpp
     Source/Polygon.cpp
+    Source/Math/Distance.cpp
 )
 
 target_include_directories(GeoCore
