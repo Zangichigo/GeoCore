@@ -89,3 +89,13 @@ Planned capabilities:
 
 * [ ] Custom analyzers
 * [ ] Plugin API
+
+
+Principe n°9
+
+Chaque capability développée doit posséder une démonstration dédiée.
+
+Une démonstration sert à :
+- valider la capability,
+- illustrer son utilisation,
+- servir de documentation vivante.

@@ -12,6 +12,11 @@
 #include <GeoCore/PositionSample.hpp>
 #include <chrono>
 
+#include <GeoCore/PositionHistory.hpp>
+#include <GeoCore/Math/Speed.hpp>
+
+#include <GeoCore/Units.hpp>
+
 int main()
 {
     using namespace GeoCore;
@@ -109,6 +114,57 @@ std::cout << "Latitude  : "
 std::cout << "Longitude : "
           << sample.position().longitude()
           << '\n';
+
+
+//
+// PositionHistory demonstration
+//
+std::cout << '\n';
+std::cout << "PositionHistory test\n";
+
+PositionHistory history;
+
+history.push_back(
+    PositionSample(
+        Position(48.8566, 2.3522),
+        std::chrono::system_clock::now()));
+
+history.push_back(
+    PositionSample(
+        Position(45.7640, 4.8357),
+        std::chrono::system_clock::now()));
+
+std::cout << "Size      : "
+          << history.size()
+          << '\n';
+
+std::cout << "First lat : "
+          << history.front().position().latitude()
+          << '\n';
+
+std::cout << "Last lat  : "
+          << history.back().position().latitude()
+          << '\n';
+
+
+PositionSample sample1(
+    Position(48.8566, 2.3522),
+    std::chrono::system_clock::now());
+
+PositionSample sample2(
+    Position(48.8576, 2.3532),
+    sample1.timestamp() + std::chrono::seconds(10));
+
+double speedMs =
+    Math::speed(sample1, sample2);
+
+std::cout << "Speed : "
+          << speedMs
+          << " m/s ("
+          << Units::toKmh(speedMs)
+          << " km/h, "
+          << Units::toMph(speedMs)
+          << " mph)\n";
 
     return 0;
 }

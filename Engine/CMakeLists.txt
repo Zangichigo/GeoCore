@@ -12,6 +12,9 @@ add_library(GeoCore STATIC
     Source/Geofencing.cpp
     Source/Math/Bearing.cpp
     Source/PositionSample.cpp
+    Source/PositionHistory.cpp
+    Source/Speed.cpp
+    Source/Units.cpp
 )
 
 target_include_directories(GeoCore
