@@ -13,7 +13,7 @@ add_library(GeoCore STATIC
     Source/Math/Bearing.cpp
     Source/PositionSample.cpp
     Source/PositionHistory.cpp
-    Source/Speed.cpp
+    Source/Math/Speed.cpp
     Source/Units.cpp
 )
 
