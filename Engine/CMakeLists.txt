@@ -14,7 +14,6 @@ add_library(GeoCore STATIC
     Source/PositionSample.cpp
     Source/Math/Speed.cpp
     Source/Units.cpp
-    Source/Movement/Heading.cpp
     Source/Track.cpp
     Source/Tracking/Distance.cpp
     Source/Math/Midpoint.cpp
@@ -24,6 +23,7 @@ add_library(GeoCore STATIC
     Source/Tracking/AverageSpeed.cpp
     Source/Movement/Stationary.cpp
     Source/Movement/Acceleration.cpp
+    Source/Movement/Course.cpp
 )
 
 target_include_directories(GeoCore

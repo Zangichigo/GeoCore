@@ -27,6 +27,7 @@
 
 #include <GeoCore/Movement/Stationary.hpp>
 #include <GeoCore/Movement/Acceleration.hpp>
+#include <GeoCore/Movement/Course.hpp>
 
 int main()
 {
@@ -270,6 +271,23 @@ std::cout
     << Units::toMph(average)
     << " mph)\n";
 
+
+
+//------------------------------------------------------------------
+// Course
+//------------------------------------------------------------------
+
+std::cout << "\n=== Course ===\n";
+
+double currentCourse =
+    Movement::course(
+        sample,
+        sample2);
+
+std::cout
+    << "Course : "
+    << currentCourse
+    << "°\n";
 
 
 //------------------------------------------------------------------

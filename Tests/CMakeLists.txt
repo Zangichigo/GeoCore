@@ -13,6 +13,7 @@ add_executable(GeoCoreTests
     Tracking/AverageSpeedTests.cpp
     Movement/StationaryTests.cpp
     Movement/AccelerationTests.cpp
+    Movement/CourseTests.cpp
 )
 
 target_link_libraries(GeoCoreTests
