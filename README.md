@@ -1,24 +1,252 @@
 # GeoCore
 
-> Making geofencing simple.
+# GeoCore
 
-GeoCore is a simple platform for creating and managing intelligent geofencing zones.
+> **Turning location into spatial knowledge.**
 
-Designed to be local-first, open source and hardware independent, GeoCore provides a reusable engine for building reliable geofencing applications.
+![C++](https://img.shields.io/badge/C%2B%2B-20-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://img.shields.io/badge/tests-33%20passing-brightgreen)
+![Platform](https://img.shields.io/badge/platform-cross--platform-lightgrey)
 
-The first reference implementation targets a virtual fencing collar for dogs, but GeoCore itself remains application-independent.
 
-## Key Principles
+GeoCore is a modern, lightweight and hardware-agnostic C++ geospatial engine.
 
-- Local first
-- Open Source
-- Hardware independent
-- No mandatory cloud
-- Reliable decision engine
-- Simple configuration
+It provides reusable geospatial objects and algorithms for applications that need to process spatial information.
 
-## Project Status
+GeoCore focuses on simplicity, consistency and long-term maintainability.
 
-🚧 Early design phase
+---
 
-Documentation is currently being written before implementation begins.
+# Why GeoCore?
+
+Excellent geospatial libraries already exist.
+
+Many of them are extremely powerful, but they often target a very broad range of use cases and come with significant complexity.
+
+GeoCore follows a different philosophy.
+
+It intentionally focuses on the most common geospatial operations while keeping its API intuitive, lightweight and enjoyable to use.
+
+GeoCore is not designed to replace large geospatial frameworks.
+
+It is designed to become a clean and reliable foundation for modern geospatial applications.
+
+---
+
+# Features
+
+## Core
+
+- Position
+- PositionSample
+- Track
+- Zone
+- WorldState
+
+## Math
+
+- Distance
+- Bearing
+- Midpoint
+- Destination *(planned)*
+- Interpolation *(planned)*
+
+## Geometry
+
+- Circle
+- Polygon
+- Rectangle
+- Polyline *(planned)*
+
+## Movement
+
+- Speed
+- Heading
+- Acceleration *(planned)*
+- Stationary Detection *(planned)*
+
+## Tracking
+
+- Track Distance
+- Track Duration *(planned)*
+- Average Speed *(planned)*
+
+---
+
+# Philosophy
+
+GeoCore is built around a few simple principles.
+
+- Keep the API simple.
+- Keep responsibilities separated.
+- Stay hardware independent.
+- Stay business independent.
+- Prefer stability over feature count.
+
+More information can be found in the project documentation.
+
+---
+
+# Example
+
+```cpp
+using namespace GeoCore;
+
+Position paris(48.8566, 2.3522);
+Position london(51.5074, -0.1278);
+
+double distance = Math::distance(paris, london);
+
+double bearing = Math::bearing(paris, london);
+
+Position midpoint = Math::midpoint(paris, london);
+```
+
+Simple.
+
+Readable.
+
+Predictable.
+
+---
+
+# Project Structure
+
+```
+GeoCore/
+│
+├── Engine/
+├── Demo/
+├── Tests/
+├── Documentation/
+├── Capabilities/
+├── Backlog/
+└── .github/
+```
+
+---
+
+# Documentation
+
+The documentation is organized to help new contributors quickly understand the project.
+
+Recommended reading order:
+
+1. Getting Started
+2. Manifesto
+3. Design Principles
+4. API Philosophy
+5. Roadmap
+
+Architecture decisions are documented separately using ADRs.
+
+---
+
+# Building
+
+Configure:
+
+```bash
+cmake -B build
+```
+
+Build:
+
+```bash
+cmake --build build
+```
+
+---
+
+# Running Tests
+
+Run every unit test:
+
+```bash
+ctest --test-dir build
+```
+
+Every pull request should compile successfully and pass all tests.
+
+---
+
+# Project Goals
+
+GeoCore aims to become a reusable geospatial engine for:
+
+- Robotics
+- GIS software
+- Asset tracking
+- Outdoor navigation
+- Scientific simulations
+- Smart-home applications
+- Embedded systems
+
+GeoCore itself remains independent from all of these domains.
+
+---
+
+# Out of Scope
+
+GeoCore intentionally does not include:
+
+- Home Assistant integrations
+- MQTT
+- Zigbee
+- LoRa
+- GPS hardware drivers
+- User interfaces
+- Cloud services
+
+These belong to applications built on top of GeoCore.
+
+---
+
+# Quality
+
+GeoCore emphasizes software quality through:
+
+- Unit tests
+- Continuous Integration
+- Architecture Decision Records (ADR)
+- Living demonstrations
+- Consistent API design
+- Comprehensive documentation
+
+---
+
+# Roadmap
+
+The current development roadmap is available in:
+
+```
+Documentation/5.Roadmap.md
+```
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+Before opening a Pull Request, please read:
+
+- CONTRIBUTING.md
+- Documentation/1.GettingStarted.md
+- Documentation/6.CapabilityTemplate.md
+
+Every contribution should include:
+
+- Source code
+- Unit tests
+- Demonstration
+- Documentation
+
+---
+
+# License
+
+GeoCore is released under the MIT License.
+
+See the LICENSE file for details.

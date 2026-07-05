@@ -12,9 +12,18 @@ add_library(GeoCore STATIC
     Source/Geofencing.cpp
     Source/Math/Bearing.cpp
     Source/PositionSample.cpp
-    Source/PositionHistory.cpp
     Source/Math/Speed.cpp
     Source/Units.cpp
+    Source/Movement/Heading.cpp
+    Source/Track.cpp
+    Source/Tracking/Distance.cpp
+    Source/Math/Midpoint.cpp
+    Source/Rectangle.cpp
+    Source/Math/Destination.cpp
+    Source/Tracking/Duration.cpp
+    Source/Tracking/AverageSpeed.cpp
+    Source/Movement/Stationary.cpp
+    Source/Movement/Acceleration.cpp
 )
 
 target_include_directories(GeoCore

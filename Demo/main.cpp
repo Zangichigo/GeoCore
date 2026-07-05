@@ -1,170 +1,330 @@
-#include <GeoCore/Circle.hpp>
 #include <GeoCore/Engine.hpp>
-#include <GeoCore/Geofencing.hpp>
-#include <GeoCore/Math/Bearing.hpp>
+
+#include <GeoCore/Circle.hpp>
 #include <GeoCore/Polygon.hpp>
+#include <GeoCore/Rectangle.hpp>
 #include <GeoCore/Zone.hpp>
+#include <GeoCore/Geofencing.hpp>
 
-#include <iostream>
-#include <memory>
-#include <vector>
-
+#include <GeoCore/Track.hpp>
 #include <GeoCore/PositionSample.hpp>
-#include <chrono>
 
-#include <GeoCore/PositionHistory.hpp>
+#include <GeoCore/Math/Bearing.hpp>
+#include <GeoCore/Math/Destination.hpp>
+#include <GeoCore/Math/Midpoint.hpp>
 #include <GeoCore/Math/Speed.hpp>
 
 #include <GeoCore/Units.hpp>
+
+#include <chrono>
+#include <iostream>
+#include <memory>
+#include <vector>
+#include <iomanip>
+
+#include <GeoCore/Tracking/Duration.hpp>
+#include <GeoCore/Tracking/AverageSpeed.hpp>
+
+#include <GeoCore/Movement/Stationary.hpp>
+#include <GeoCore/Movement/Acceleration.hpp>
 
 int main()
 {
     using namespace GeoCore;
 
-    //
-    // Circle / Engine demonstration
-    //
+    //------------------------------------------------------------------
+    // Common positions
+    //------------------------------------------------------------------
+
+    Position paris(48.8566, 2.3522);
+    Position london(51.5074, -0.1278);
+    Position lyon(45.7640, 4.8357);
+
+    //------------------------------------------------------------------
+    // Engine / Circle
+    //------------------------------------------------------------------
+
     Engine engine;
 
     engine.addZone(
         Zone(
             "Home",
             std::make_unique<Circle>(
-                Position(48.8566, 2.3522),
+                paris,
                 100.0)));
 
     WorldState state(
         Position(48.8567, 2.3523));
 
-    ProcessingResult result = engine.process(state);
+    ProcessingResult engineResult =
+        engine.process(state);
 
-    std::cout << std::boolalpha;
-    std::cout << "Circle test\n";
-    std::cout << "Inside: "
-              << result.inside()
-              << '\n';
+    std::cout
+    << std::boolalpha
+    << std::fixed
+    << std::setprecision(2);
+    
+    std::cout << "\n=== Engine / Circle ===\n";
 
-    //
-    // Polygon demonstration
-    //
+    std::cout
+        << "Inside : "
+        << engineResult.inside()
+        << '\n';
+
+    //------------------------------------------------------------------
+    // Zone transition
+    //------------------------------------------------------------------
+
+    std::cout << "\n=== Zone Transition ===\n";
+
+    std::cout
+        << "Outside -> Inside : "
+        << static_cast<int>(
+            detectTransition(
+                ZoneMembership::Outside,
+                ZoneMembership::Inside))
+        << '\n';
+
+
+
+    //------------------------------------------------------------------
+    // Polygon
+    //------------------------------------------------------------------
+
     Polygon garden(
-        std::vector<Position>
-        {
-            Position(0.0, 0.0),
-            Position(0.0, 10.0),
-            Position(10.0, 10.0),
-            Position(10.0, 0.0)
-        });
+    {
+        {0.0, 0.0},
+        {0.0, 10.0},
+        {10.0, 10.0},
+        {10.0, 0.0}
+    });
 
-    std::cout << '\n';
-    std::cout << "Polygon test\n";
+    std::cout << "\n=== Polygon ===\n";
 
-    std::cout << "Inside (5,5): "
-              << garden.contains(Position(5.0, 5.0))
-              << '\n';
+    std::cout
+        << "Inside (5,5)   : "
+        << garden.contains(Position(5.0, 5.0))
+        << '\n';
 
-    std::cout << "Outside (15,5): "
-              << garden.contains(Position(15.0, 5.0))
-              << '\n';
-
-    //
-    // Zone transition demonstration
-    //
-    std::cout << '\n';
-    std::cout << "Transition test\n";
-
-    std::cout << "Outside -> Inside : "
-              << static_cast<int>(
-                     detectTransition(
-                         ZoneMembership::Outside,
-                         ZoneMembership::Inside))
-              << '\n';
-
-    //
-    // Bearing demonstration
-    //
-    Position paris(48.8566, 2.3522);
-    Position london(51.5074, -0.1278);
-    Position lyon(45.7640, 4.8357);
-
-    std::cout << '\n';
-    std::cout << "Bearing test\n";
-
-    std::cout << "Paris -> London : "
-              << Math::bearing(paris, london)
-              << "°\n";
-
-    std::cout << "Paris -> Lyon   : "
-              << Math::bearing(paris, lyon)
-              << "°\n";
-//
-// PositionSample demonstration
-//
-    std::cout << '\n';
-std::cout << "PositionSample test\n";
-
-PositionSample sample(
-    Position(48.8566, 2.3522),
-    std::chrono::system_clock::now());
-
-std::cout << "Latitude  : "
-          << sample.position().latitude()
-          << '\n';
-
-std::cout << "Longitude : "
-          << sample.position().longitude()
-          << '\n';
+    std::cout
+        << "Outside (15,5) : "
+        << garden.contains(Position(15.0, 5.0))
+        << '\n';
 
 
-//
-// PositionHistory demonstration
-//
-std::cout << '\n';
-std::cout << "PositionHistory test\n";
+   
 
-PositionHistory history;
+    //------------------------------------------------------------------
+    // PositionSample
+    //------------------------------------------------------------------
 
-history.push_back(
+    PositionSample sample(
+        paris,
+        std::chrono::system_clock::now());
+
+    std::cout << "\n=== PositionSample ===\n";
+
+    std::cout
+        << "Latitude  : "
+        << sample.position().latitude()
+        << '\n';
+
+    std::cout
+        << "Longitude : "
+        << sample.position().longitude()
+        << '\n';
+
+
+
+
+
+    //------------------------------------------------------------------
+    // Track
+    //------------------------------------------------------------------
+
+    Track track;
+
+    track.push_back(sample);
+
+    track.push_back(
+        PositionSample(
+            lyon,
+            std::chrono::system_clock::now()));
+
+    std::cout << "\n=== Track ===\n";
+
+    std::cout
+        << "Size      : "
+        << track.size()
+        << '\n';
+
+    std::cout
+        << "First lat : "
+        << track.front().position().latitude()
+        << '\n';
+
+    std::cout
+        << "Last lat  : "
+        << track.back().position().latitude()
+        << '\n';
+        
+        
+
+    //------------------------------------------------------------------
+    // Bearing
+    //------------------------------------------------------------------
+
+    std::cout << "\n=== Bearing ===\n";
+
+    std::cout
+        << "Paris -> London : "
+        << Math::bearing(paris, london)
+        << "°\n";
+
+    std::cout
+        << "Paris -> Lyon   : "
+        << Math::bearing(paris, lyon)
+        << "°\n";
+
+
+
+
+    //------------------------------------------------------------------
+    // Speed
+    //------------------------------------------------------------------
+
+    PositionSample sample2(
+        Position(48.8576, 2.3532),
+        sample.timestamp() + std::chrono::seconds(10));
+
+    double speedMs =
+        Math::speed(sample, sample2);
+
+    std::cout << "\n=== Speed ===\n";
+
+    std::cout
+        << speedMs
+        << " m/s ("
+        << Units::toKmh(speedMs)
+        << " km/h, "
+        << Units::toMph(speedMs)
+        << " mph)\n";
+
+        
+
+    //------------------------------------------------------------------
+    // Destination
+    //------------------------------------------------------------------
+
+    Position destination =
+        Math::destination(
+            paris,
+            45.0,
+            1000.0);
+
+    std::cout << "\n=== Destination ===\n";
+
+    std::cout
+        << "Start      : Paris\n";
+
+    std::cout
+        << "Bearing    : 45°\n";
+
+    std::cout
+        << "Distance   : 1000 m\n";
+
+    std::cout
+        << "Latitude   : "
+        << destination.latitude()
+        << '\n';
+
+    std::cout
+        << "Longitude  : "
+        << destination.longitude()
+        << '\n';
+
+
+    //------------------------------------------------------------------
+    // Tracking
+    //------------------------------------------------------------------
+
+std::cout << "\n=== Tracking ===\n";
+
+auto trackDuration =
+    Tracking::duration(track);
+
+std::cout
+    << "Duration      : "
+    << std::chrono::duration_cast<std::chrono::seconds>(trackDuration).count()
+    << " s\n";
+
+double average =
+    Tracking::averageSpeed(track);
+
+std::cout
+    << "Average speed : "
+    << average
+    << " m/s ("
+    << Units::toKmh(average)
+    << " km/h, "
+    << Units::toMph(average)
+    << " mph)\n";
+
+
+
+//------------------------------------------------------------------
+// Movement
+//------------------------------------------------------------------
+
+std::cout << "\n=== Movement ===\n";
+
+Track stationaryTrack;
+
+auto start = std::chrono::system_clock::now();
+
+stationaryTrack.push_back(
     PositionSample(
-        Position(48.8566, 2.3522),
-        std::chrono::system_clock::now()));
+        Position(48.856600, 2.352200),
+        start));
 
-history.push_back(
+stationaryTrack.push_back(
     PositionSample(
-        Position(45.7640, 4.8357),
-        std::chrono::system_clock::now()));
+        Position(48.856602, 2.352201),
+        start + std::chrono::seconds(60)));
 
-std::cout << "Size      : "
-          << history.size()
-          << '\n';
+bool isStationary =
+    Movement::stationary(
+        stationaryTrack,
+        5.0,
+        std::chrono::seconds(30));
 
-std::cout << "First lat : "
-          << history.front().position().latitude()
-          << '\n';
+std::cout
+    << "Stationary    : "
+    << std::boolalpha
+    << isStationary
+    << '\n';
 
-std::cout << "Last lat  : "
-          << history.back().position().latitude()
-          << '\n';
+auto t0 = std::chrono::system_clock::now();
 
+PositionSample a(
+    Position(48.856600, 2.352200),
+    t0);
 
-PositionSample sample1(
-    Position(48.8566, 2.3522),
-    std::chrono::system_clock::now());
+PositionSample b(
+    Position(48.856650, 2.352250),
+    t0 + std::chrono::seconds(10));
 
-PositionSample sample2(
-    Position(48.8576, 2.3532),
-    sample1.timestamp() + std::chrono::seconds(10));
+PositionSample c(
+    Position(48.857000, 2.352600),
+    t0 + std::chrono::seconds(20));
 
-double speedMs =
-    Math::speed(sample1, sample2);
+double accel =
+    Movement::acceleration(a, b, c);
 
-std::cout << "Speed : "
-          << speedMs
-          << " m/s ("
-          << Units::toKmh(speedMs)
-          << " km/h, "
-          << Units::toMph(speedMs)
-          << " mph)\n";
+std::cout
+    << "Acceleration  : "
+    << accel
+    << " m/s²\n";
 
     return 0;
 }

@@ -7,6 +7,26 @@ This project follows Semantic Versioning.
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Movement::acceleration().
+- Unit tests for acceleration.
+- Demo updated with acceleration.
+
+### Improved
+
+- Movement module now provides:
+  - Stationary detection.
+  - Acceleration.
+
+### Changed
+
+### Fixed
+
+---
+
 ## [0.1.0] - 2026-06-27
 
 ### Added
@@ -23,13 +43,3 @@ This project follows Semantic Versioning.
 - Initial CMake project.
 - Project licensing.
 - Open-source repository structure.
-
----
-
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Fixed
