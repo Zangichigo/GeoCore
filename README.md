@@ -226,6 +226,33 @@ Documentation/5.Roadmap.md
 
 ---
 
+GeoCore Progress
+
+✓ Geometry
+✓ Tracking
+✓ Movement Foundations
+
+Current capabilities
+--------------------
+
+✓ Distance
+✓ Duration
+✓ AverageSpeed
+✓ Course
+✓ Stationary
+✓ Acceleration
+
+Tests
+
+59/59 passing
+
+Architecture
+
+✓ ADR-009
+✓ API Guidelines
+✓ Coding Style
+
+
 # Contributing
 
 Contributions are welcome.
