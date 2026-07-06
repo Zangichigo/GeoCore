@@ -128,6 +128,36 @@ GeoCore/
 
 ---
 
+## Architecture
+
+GeoCore progressively transforms raw spatial observations into reusable knowledge.
+
+```text
+Position
+    │
+    ▼
+PositionSample
+    │
+    ▼
+Track
+    │
+    ├─────────────────────┐
+    ▼                     ▼
+CourseSeries        SpeedSeries (future)
+    │                     │
+    └──────────┬──────────┘
+               ▼
+      Observation Analysis
+               ▼
+ Application Interpretation
+```
+
+GeoCore intentionally separates observation from interpretation.
+
+The library measures and exposes reusable spatial observations, while applications remain responsible for deciding what those observations mean.
+
+---
+
 # Documentation
 
 The documentation is organized to help new contributors quickly understand the project.

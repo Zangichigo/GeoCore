@@ -6,6 +6,8 @@
 
 #include <catch2/catch_approx.hpp>
 
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+
 using namespace GeoCore;
 
 TEST_CASE("CourseSeries is empty from an empty track")
@@ -114,7 +116,9 @@ TEST_CASE("CourseSeries computes north course")
         Movement::courseSeries(track);
 
     REQUIRE(series.size() == 1);
-    REQUIRE(series[0] == Catch::Approx(0.0).margin(0.1));
+    REQUIRE_THAT(
+    series[0],
+    Catch::Matchers::WithinAbs(0.0, 0.1));
 }
 
 TEST_CASE("CourseSeries preserves course order")
@@ -143,6 +147,11 @@ TEST_CASE("CourseSeries preserves course order")
 
     REQUIRE(series.size() == 2);
 
-    REQUIRE(series[1] == Catch::Approx(90.0).margin(0.1));
-    REQUIRE(series[1] == Catch::Approx(90.0).margin(0.1));
+    REQUIRE_THAT(
+    series[0],
+    Catch::Matchers::WithinAbs(0.0, 0.1));
+
+    REQUIRE_THAT(
+    series[1],
+    Catch::Matchers::WithinAbs(90.0, 0.1));
 }

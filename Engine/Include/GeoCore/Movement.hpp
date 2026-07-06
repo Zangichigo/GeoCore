@@ -4,3 +4,4 @@
 #include <GeoCore/Movement/Course.hpp>
 #include <GeoCore/Movement/CourseSeries.hpp>
 #include <GeoCore/Movement/Stationary.hpp>
+#include <GeoCore/Movement/CourseAnalysis.hpp>
