@@ -34,7 +34,7 @@ add_library(GeoCore STATIC
     Source/Movement/Stationary.cpp
     Source/Movement/Acceleration.cpp
     Source/Movement/Course.cpp
-
+    Source/Movement/CourseSeries.cpp
 
 )
 

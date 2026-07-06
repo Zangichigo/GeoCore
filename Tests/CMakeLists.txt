@@ -21,6 +21,7 @@ add_executable(GeoCoreTests
     Movement/StationaryTests.cpp
     Movement/AccelerationTests.cpp
     Movement/CourseTests.cpp
+    Movement/CourseSeriesTests.cpp
 )
 
 target_link_libraries(GeoCoreTests
