@@ -43,3 +43,6 @@ This project follows Semantic Versioning.
 - Initial CMake project.
 - Project licensing.
 - Open-source repository structure.
+- Added Math::normalizeAngle()
+- Added unit tests.
+- Added demo example.

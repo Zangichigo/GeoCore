@@ -47,7 +47,7 @@ Algorithms:
 - Bearing
 - Midpoint
 - Speed
-- Heading
+- Course
 
 The engine must remain completely independent from:
 

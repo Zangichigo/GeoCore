@@ -6,7 +6,7 @@
 
 ![C++](https://img.shields.io/badge/C%2B%2B-20-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-33%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-59%2F59%20passing-brightgreen)
 ![Platform](https://img.shields.io/badge/platform-cross--platform-lightgrey)
 
 
@@ -62,7 +62,7 @@ It is designed to become a clean and reliable foundation for modern geospatial a
 ## Movement
 
 - Speed
-- Heading
+- Course
 - Acceleration *(planned)*
 - Stationary Detection *(planned)*
 
@@ -171,6 +171,16 @@ Every pull request should compile successfully and pass all tests.
 
 ---
 
+## Design Philosophy
+
+GeoCore focuses on observable geospatial information.
+
+It computes values that can be directly derived from spatial observations, while avoiding assumptions about the physical behaviour of tracked objects.
+
+Applications remain responsible for interpreting these observations according to their own domain.
+
+---
+
 # Project Goals
 
 GeoCore aims to become a reusable geospatial engine for:
@@ -228,9 +238,10 @@ Documentation/5.Roadmap.md
 
 GeoCore Progress
 
+✓ Math
 ✓ Geometry
 ✓ Tracking
-✓ Movement Foundations
+✓ Movement
 
 Current capabilities
 --------------------
@@ -238,9 +249,10 @@ Current capabilities
 ✓ Distance
 ✓ Duration
 ✓ AverageSpeed
+✓ Speed
 ✓ Course
-✓ Stationary
 ✓ Acceleration
+✓ Stationary
 
 Tests
 

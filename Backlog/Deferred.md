@@ -1,1 +1,1 @@
-Ajouter des tests à Heading lorsque la couche Movement apportera une logique propre.
+Future movement analysis should operate on temporal observations rather than isolated samples.

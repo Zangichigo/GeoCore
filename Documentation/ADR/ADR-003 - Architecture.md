@@ -122,7 +122,7 @@ Typical information includes:
 
 - Position
 - Speed
-- Heading
+- Course
 - GPS accuracy
 - Battery level
 - Active profile

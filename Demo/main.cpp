@@ -13,6 +13,8 @@
 #include <GeoCore/Math/Destination.hpp>
 #include <GeoCore/Math/Midpoint.hpp>
 #include <GeoCore/Math/Speed.hpp>
+#include <GeoCore/Math/NormalizeAngle.hpp>
+#include <GeoCore/Math/NormalizeSignedAngle.hpp>
 
 #include <GeoCore/Units.hpp>
 
@@ -125,6 +127,8 @@ int main()
 
     std::cout << "\n=== PositionSample ===\n";
 
+    std::cout << std::setprecision(6);
+
     std::cout
         << "Latitude  : "
         << sample.position().latitude()
@@ -135,39 +139,45 @@ int main()
         << sample.position().longitude()
         << '\n';
 
+    std::cout << std::setprecision(2);   
 
 
 
+auto trackStart = std::chrono::system_clock::now();
+auto trackEnd   = trackStart + std::chrono::hours(5);
 
     //------------------------------------------------------------------
     // Track
     //------------------------------------------------------------------
 
-    Track track;
+Track track;
 
-    track.push_back(sample);
+track.push_back(
+    PositionSample(
+        paris,
+        trackStart));
 
-    track.push_back(
-        PositionSample(
-            lyon,
-            std::chrono::system_clock::now()));
+track.push_back(
+    PositionSample(
+        lyon,
+        trackEnd));
 
-    std::cout << "\n=== Track ===\n";
+std::cout << "\n=== Track ===\n";
 
-    std::cout
-        << "Size      : "
-        << track.size()
-        << '\n';
+std::cout
+    << "Size      : "
+    << track.size()
+    << '\n';
 
-    std::cout
-        << "First lat : "
-        << track.front().position().latitude()
-        << '\n';
+std::cout
+    << "First lat : "
+    << track.front().position().latitude()
+    << '\n';
 
-    std::cout
-        << "Last lat  : "
-        << track.back().position().latitude()
-        << '\n';
+std::cout
+    << "Last lat  : "
+    << track.back().position().latitude()
+    << '\n';
         
         
 
@@ -234,6 +244,8 @@ int main()
     std::cout
         << "Distance   : 1000 m\n";
 
+    std::cout << std::fixed << std::setprecision(6);
+        
     std::cout
         << "Latitude   : "
         << destination.latitude()
@@ -344,5 +356,35 @@ std::cout
     << accel
     << " m/s²\n";
 
+
+    //------------------------------------------------------------------
+    // Angles
+    //------------------------------------------------------------------
+    
+std::cout << "\n=== Normalize Angle ===\n";
+
+std::cout << "370°  -> " << Math::normalizeAngle(370.0) << "°\n";
+std::cout << "-20°  -> " << Math::normalizeAngle(-20.0) << "°\n";
+std::cout << "720°  -> " << Math::normalizeAngle(720.0) << "°\n";
+
+ 
+    //------------------------------------------------------------------
+    // Normalize Signed Angle
+    //------------------------------------------------------------------
+
+std::cout << "\n=== Normalize Signed Angle ===\n";
+
+std::cout << "181 deg   -> "
+          << Math::normalizeSignedAngle(181.0)
+          << " deg\n";
+
+std::cout << "270 deg   -> "
+          << Math::normalizeSignedAngle(270.0)
+          << " deg\n";
+
+std::cout << "-270 deg  -> "
+          << Math::normalizeSignedAngle(-270.0)
+          << " deg\n";
+    
     return 0;
 }

@@ -12,15 +12,15 @@
 
 # Vision
 
-GeoCore aims to become the reference open-source platform for creating and managing intelligent geofencing systems.
+GeoCore aims to become a modern, lightweight and reusable open-source geospatial engine.
 
-The project is designed to make geofencing accessible, reliable and independent from proprietary ecosystems.
+It provides reusable spatial objects and algorithms that can serve as the foundation for a wide variety of applications.
 
 GeoCore focuses on one objective:
 
-> **Making geofencing simple.**
+> **Turning location into spatial knowledge.**
 
-Whether used for animals, robots, autonomous devices or future applications, GeoCore provides a common decision engine capable of understanding geographical zones and making reliable local decisions.
+Whether used for robotics, asset tracking, GIS, scientific simulations, smart-home systems or future applications, GeoCore provides reliable geospatial building blocks while remaining completely independent from hardware, business domains and external ecosystems.
 
 ---
 

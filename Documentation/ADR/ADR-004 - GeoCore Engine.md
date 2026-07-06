@@ -76,7 +76,7 @@ Typical observations include:
 
 - Position
 - Velocity
-- Heading
+- Course
 - Time
 - Battery state
 - Sensor values
