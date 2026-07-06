@@ -63,8 +63,9 @@ It is designed to become a clean and reliable foundation for modern geospatial a
 
 - Speed
 - Course
-- Acceleration *(planned)*
-- Stationary Detection *(planned)*
+- CourseSeries
+- Acceleration
+- Stationary Detection
 
 ## Tracking
 
@@ -238,10 +239,11 @@ Documentation/5.Roadmap.md
 
 GeoCore Progress
 
-✓ Math
 ✓ Geometry
 ✓ Tracking
-✓ Movement
+✓ Mathematical Foundations
+✓ Movement Foundations
+✓ Temporal Observation Foundations
 
 Current capabilities
 --------------------

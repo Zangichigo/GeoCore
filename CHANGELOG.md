@@ -46,3 +46,5 @@ This project follows Semantic Versioning.
 - Added Math::normalizeAngle()
 - Added unit tests.
 - Added demo example.
+- Added `Movement::CourseSeries`, a temporal observation object representing the sequence of movement courses computed from a `Track`.
+- Added unit tests for `CourseSeries`.
