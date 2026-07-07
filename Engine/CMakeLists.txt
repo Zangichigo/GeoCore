@@ -25,6 +25,8 @@ add_library(GeoCore STATIC
     Source/Math/Destination.cpp
     Source/Math/NormalizeAngle.cpp
     Source/Math/NormalizeSignedAngle.cpp
+    Source/Math/CircularMean.cpp
+    Source/Math/CircularRange.cpp
 
     Source/Tracking/Distance.cpp
     Source/Tracking/Duration.cpp

@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include <GeoCore/Movement/CourseAnalysis.hpp>
 #include <GeoCore/Movement/CourseSeries.hpp>
@@ -7,12 +8,9 @@
 
 #include <chrono>
 
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/matchers/catch_matchers_floating_point.hpp>
-
 using namespace GeoCore;
 
-TEST_CASE("CourseAnalysis of empty CourseSeries")
+TEST_CASE("CourseAnalysis mean of empty CourseSeries")
 {
     Track track;
 
@@ -20,99 +18,69 @@ TEST_CASE("CourseAnalysis of empty CourseSeries")
         Movement::courseSeries(track);
 
     auto analysis =
-        Movement::courseAnalysis(series);
-
-    REQUIRE(analysis.minimum() == 0.0);
-    REQUIRE(analysis.maximum() == 0.0);
-    REQUIRE(analysis.range() == 0.0);
-}
-
-TEST_CASE("CourseAnalysis minimum")
-{
-    Track track;
-
-    auto now = std::chrono::system_clock::now();
-
-    track.push_back(PositionSample(Position(0.0, 0.0), now));
-    track.push_back(PositionSample(Position(1.0, 0.0), now + std::chrono::seconds(1)));
-    track.push_back(PositionSample(Position(1.0, 1.0), now + std::chrono::seconds(2)));
-
-    auto series =
-        Movement::courseSeries(track);
-
-    auto analysis =
-        Movement::courseAnalysis(series);
+        Movement::CourseAnalysis::fromSeries(series);
 
     REQUIRE_THAT(
-    analysis.minimum(),
-    Catch::Matchers::WithinAbs(0.0, 0.1));
+        analysis.mean(),
+        Catch::Matchers::WithinAbs(0.0, 1e-6));
 }
 
-TEST_CASE("CourseAnalysis maximum")
+TEST_CASE("CourseAnalysis mean of single course")
 {
     Track track;
 
     auto now = std::chrono::system_clock::now();
 
-    track.push_back(PositionSample(Position(0.0, 0.0), now));
-    track.push_back(PositionSample(Position(1.0, 0.0), now + std::chrono::seconds(1)));
-    track.push_back(PositionSample(Position(1.0, 1.0), now + std::chrono::seconds(2)));
+    track.push_back(
+        PositionSample(
+            Position(0.0, 0.0),
+            now));
+
+    track.push_back(
+        PositionSample(
+            Position(1.0, 0.0),
+            now + std::chrono::seconds(1)));
 
     auto series =
         Movement::courseSeries(track);
 
     auto analysis =
-        Movement::courseAnalysis(series);
+        Movement::CourseAnalysis::fromSeries(series);
 
     REQUIRE_THAT(
-    analysis.maximum(),
-    Catch::Matchers::WithinAbs(90.0, 0.1));
+        analysis.mean(),
+        Catch::Matchers::WithinAbs(0.0, 0.1));
 }
 
-TEST_CASE("CourseAnalysis range")
+TEST_CASE("CourseAnalysis mean of two courses")
 {
     Track track;
 
     auto now = std::chrono::system_clock::now();
 
-    track.push_back(PositionSample(Position(0.0, 0.0), now));
-    track.push_back(PositionSample(Position(1.0, 0.0), now + std::chrono::seconds(1)));
-    track.push_back(PositionSample(Position(1.0, 1.0), now + std::chrono::seconds(2)));
+    track.push_back(
+        PositionSample(
+            Position(0.0, 0.0),
+            now));
+
+    track.push_back(
+        PositionSample(
+            Position(1.0, 0.0),
+            now + std::chrono::seconds(1)));
+
+    track.push_back(
+        PositionSample(
+            Position(1.0, 1.0),
+            now + std::chrono::seconds(2)));
 
     auto series =
         Movement::courseSeries(track);
 
     auto analysis =
-        Movement::courseAnalysis(series);
+        Movement::CourseAnalysis::fromSeries(series);
 
     REQUIRE_THAT(
-    analysis.range(),
-    Catch::Matchers::WithinAbs(90.0, 0.1));
+        analysis.mean(),
+        Catch::Matchers::WithinAbs(45.0, 0.2));
 }
 
-TEST_CASE("CourseAnalysis single course")
-{
-    Track track;
-
-    auto now = std::chrono::system_clock::now();
-
-    track.push_back(PositionSample(Position(0.0, 0.0), now));
-    track.push_back(PositionSample(Position(1.0, 0.0), now + std::chrono::seconds(1)));
-
-    auto series =
-        Movement::courseSeries(track);
-
-    auto analysis =
-        Movement::courseAnalysis(series);
-
-    REQUIRE_THAT(
-    analysis.minimum(),
-    Catch::Matchers::WithinAbs(0.0, 0.1));
-    REQUIRE_THAT(
-    analysis.maximum(),
-    Catch::Matchers::WithinAbs(0.0, 0.1));
-
-REQUIRE_THAT(
-    analysis.range(),
-    Catch::Matchers::WithinAbs(0.0, 0.1));
-}

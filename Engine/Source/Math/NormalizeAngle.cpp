@@ -14,6 +14,18 @@ double normalizeAngle(double angle)
         angle += 360.0;
     }
 
+constexpr double epsilon = 1e-12;
+
+if (std::abs(angle) < epsilon)
+{
+    return 0.0;
+}
+
+if (std::abs(angle - 360.0) < epsilon)
+{
+    return 0.0;
+}
+
     return angle;
 }
 

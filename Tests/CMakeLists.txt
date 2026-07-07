@@ -13,6 +13,9 @@ add_executable(GeoCoreTests
     Math/SpeedTests.cpp
     Math/DestinationTests.cpp
     Math/NormalizeSignedAngleTests.cpp
+    Math/CircularMeanTests.cpp
+    Math/AngularDifferenceTests.cpp
+    Math/CircularRangeTests.cpp
 
     Tracking/TrackingDistanceTests.cpp
     Tracking/DurationTests.cpp

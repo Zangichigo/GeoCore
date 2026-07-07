@@ -2,64 +2,33 @@
 
 #include <GeoCore/Movement/CourseSeries.hpp>
 
-#include <algorithm>
-
+#include <GeoCore/Math/CircularMean.hpp>
 
 namespace GeoCore::Movement
 {
 
 CourseAnalysis::CourseAnalysis(
-    double minimum,
-    double maximum,
-    double range)
-    : m_minimum(minimum)
-    , m_maximum(maximum)
-    , m_range(range)
+    double mean)
+    : m_mean(mean)
 {
 }
 
-double CourseAnalysis::minimum() const noexcept
+double CourseAnalysis::mean() const noexcept
 {
-    return m_minimum;
+    return m_mean;
 }
 
-double CourseAnalysis::maximum() const noexcept
-{
-    return m_maximum;
-}
-
-double CourseAnalysis::range() const noexcept
-{
-    return m_range;
-}
-
-CourseAnalysis courseAnalysis(
+CourseAnalysis CourseAnalysis::fromSeries(
     const CourseSeries& series)
 {
     if (series.empty())
     {
-        return CourseAnalysis(
-            0.0,
-            0.0,
-            0.0);
+        return CourseAnalysis(0.0);
     }
 
-    const auto& values = series.values();
-
-    const auto min =
-        *std::min_element(
-            values.begin(),
-            values.end());
-
-    const auto max =
-        *std::max_element(
-            values.begin(),
-            values.end());
-
     return CourseAnalysis(
-        min,
-        max,
-        max - min);
+        GeoCore::Math::circularMean(
+            series.values()));
 }
 
 } // namespace GeoCore::Movement

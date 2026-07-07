@@ -15,6 +15,7 @@
 #include <GeoCore/Math/Speed.hpp>
 #include <GeoCore/Math/NormalizeAngle.hpp>
 #include <GeoCore/Math/NormalizeSignedAngle.hpp>
+#include <GeoCore/Math/CircularMean.hpp>
 
 #include <GeoCore/Units.hpp>
 

@@ -288,7 +288,7 @@ Current capabilities
 
 Tests
 
-59/59 passing
+107/107 passing
 
 Architecture
 

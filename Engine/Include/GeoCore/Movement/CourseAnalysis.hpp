@@ -8,33 +8,18 @@ class CourseSeries;
 class CourseAnalysis
 {
 public:
+    [[nodiscard]]
+    static CourseAnalysis fromSeries(
+        const CourseSeries& series);
 
     [[nodiscard]]
-    double minimum() const noexcept;
-
-    [[nodiscard]]
-    double maximum() const noexcept;
-
-    [[nodiscard]]
-    double range() const noexcept;
+    double mean() const noexcept;
 
 private:
-
     explicit CourseAnalysis(
-        double minimum,
-        double maximum,
-        double range);
+        double mean);
 
-    double m_minimum;
-    double m_maximum;
-    double m_range;
-
-    friend CourseAnalysis courseAnalysis(
-        const CourseSeries& series);
+    double m_mean;
 };
-
-[[nodiscard]]
-CourseAnalysis courseAnalysis(
-    const CourseSeries& series);
 
 } // namespace GeoCore::Movement
